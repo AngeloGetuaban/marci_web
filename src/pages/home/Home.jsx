@@ -52,18 +52,16 @@ const Home = () => {
   return (
   <div className="relative min-h-screen overflow-hidden bg-white text-gray-800">
     <Helmet>
-      <title>MARCI METZGER HOMES | Real State Agent</title>
+      <title>MARCI METZGER HOMES | Trusted Real Estate Agent in Pahrump</title>
       <meta
         name="description"
-        content="Discover ChiroHealot’s holistic therapies for asthma. Heal naturally with structural realignment, massage, emotional release, and more."
+        content="Buy or sell your home with confidence. Marci Metzger brings nearly 3 decades of experience helping families find their perfect property in Pahrump and beyond."
       />
-      <meta property="og:title" content="Asthma Solutions | ChiroHealot" />
+      <meta property="og:title" content="Marci Metzger Homes | Real Estate Expertise You Can Trust" />
       <meta
         property="og:description"
-        content="Breathe easier with ChiroHealot's holistic asthma relief therapies. Explore our treatments for better respiratory health."
+        content="Explore listings, get expert guidance, and experience seamless real estate service with Marci Metzger – The Ridge Realty Group's trusted agent in Pahrump, NV."
       />
-      <meta property="og:url" content="https://asthmasolutionsph.com/" />
-      <meta property="og:type" content="website" />
     </Helmet>
     <Navbar />
 

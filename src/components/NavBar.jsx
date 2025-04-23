@@ -24,14 +24,12 @@ const Navbar = () => {
         <div className="absolute left-1/2 transform -translate-x-1/2 mt-4 hidden md:block">
           <img
             src={logo}
-            alt="Chiro Healot Logo"
+            alt="Marci Logo"
             className="h-24 w-auto max-w-[240px] object-contain"
           />
         </div>
-
-        {/* Right: Book Now Button */}
         <div>
-          <Link to="/book-now">
+          <Link to="#">
             <button className="flex items-center gap-2 bg-white text-black px-6 py-2.5 rounded-full hover:bg-gray-100 transition text-sm font-semibold shadow-md">
               CALL NOW
               <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
