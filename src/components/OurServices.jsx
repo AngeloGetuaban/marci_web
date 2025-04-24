@@ -36,8 +36,9 @@ const fadeInUp = {
 
 const OurServices = () => {
   const [activeIndex, setActiveIndex] = useState(null);
+  const [hoverIndex, setHoverIndex] = useState(null);
 
-  const handleToggle = (index) => {
+  const handleClick = (index) => {
     setActiveIndex((prev) => (prev === index ? null : index));
   };
 
@@ -55,39 +56,42 @@ const OurServices = () => {
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
-        {services.map((service, i) => (
-          <div
-            key={i}
-            onClick={() => handleToggle(i)}
-            className="relative group overflow-hidden rounded-xl shadow-lg h-[400px] cursor-pointer"
-          >
-            {/* Image */}
-            <img
-              src={service.img}
-              alt={service.title}
-              className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-out"
-            />
+        {services.map((service, i) => {
+          const isVisible = activeIndex === i || hoverIndex === i;
 
-            {/* Overlay Text */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{
-                opacity: activeIndex === i ? 1 : 0,
-                y: activeIndex === i ? 0 : 30,
-              }}
-              whileHover={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, ease: 'easeOut' }}
-              className={`absolute inset-0 bg-black/60 flex flex-col justify-center items-center text-center px-6 ${
-                activeIndex === i ? 'pointer-events-auto' : 'pointer-events-none'
-              }`}
+          return (
+            <div
+              key={i}
+              onClick={() => handleClick(i)}
+              onMouseEnter={() => setHoverIndex(i)}
+              onMouseLeave={() => setHoverIndex(null)}
+              className="relative group overflow-hidden rounded-xl shadow-lg h-[400px] cursor-pointer"
             >
-              <h3 className="text-xl font-semibold text-white mb-3">
-                {service.title}
-              </h3>
-              <p className="text-sm text-white">{service.description}</p>
-            </motion.div>
-          </div>
-        ))}
+              {/* Image */}
+              <img
+                src={service.img}
+                alt={service.title}
+                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500 ease-out"
+              />
+
+              {/* Overlay */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{
+                  opacity: isVisible ? 1 : 0,
+                  y: isVisible ? 0 : 30,
+                }}
+                transition={{ duration: 0.4, ease: 'easeOut' }}
+                className="absolute inset-0 bg-black/60 flex flex-col justify-center items-center text-center px-6 pointer-events-none"
+              >
+                <h3 className="text-xl font-semibold text-white mb-3">
+                  {service.title}
+                </h3>
+                <p className="text-sm text-white">{service.description}</p>
+              </motion.div>
+            </div>
+          );
+        })}
       </div>
     </motion.section>
   );

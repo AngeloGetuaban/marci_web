@@ -38,10 +38,11 @@ const fadeInUp = {
 const GetItSold = () => {
   const [index, setIndex] = useState(0);
   const [showOverlay, setShowOverlay] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   const next = () => {
     setIndex((prev) => (prev + 1) % items.length);
-    setShowOverlay(false); // reset overlay on slide change
+    setShowOverlay(false);
   };
 
   const prev = () => {
@@ -49,7 +50,7 @@ const GetItSold = () => {
     setShowOverlay(false);
   };
 
-  const toggleOverlay = () => setShowOverlay((prev) => !prev);
+  const handleToggle = () => setShowOverlay((prev) => !prev);
 
   return (
     <div className="bg-fixed-parallax relative">
@@ -69,7 +70,9 @@ const GetItSold = () => {
 
           <div className="relative max-w-4xl mx-auto">
             <div
-              onClick={toggleOverlay}
+              onClick={handleToggle}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
               className="relative h-[450px] rounded-xl overflow-hidden backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl cursor-pointer group"
             >
               <AnimatePresence mode="wait">
@@ -81,18 +84,19 @@ const GetItSold = () => {
                   transition={{ duration: 0.5, ease: 'easeInOut' }}
                   className="w-full h-full relative"
                 >
-                  {/* Image */}
                   <img
                     src={items[index].img}
                     alt={items[index].title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                   />
 
-                  {/* Overlay Text: shows on hover or when clicked */}
+                  {/* Show overlay if hovered or clicked */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: showOverlay ? 1 : 0, y: showOverlay ? 0 : 20 }}
-                    whileHover={{ opacity: 1, y: 0 }}
+                    animate={{
+                      opacity: showOverlay || isHovered ? 1 : 0,
+                      y: showOverlay || isHovered ? 0 : 20,
+                    }}
                     transition={{ duration: 0.4 }}
                     className="absolute inset-0 bg-black/60 flex flex-col items-center justify-center text-center text-white px-6 pointer-events-none"
                   >
@@ -104,7 +108,7 @@ const GetItSold = () => {
                     </p>
                   </motion.div>
 
-                  {/* Arrows */}
+                  {/* Navigation Arrows */}
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
@@ -128,7 +132,7 @@ const GetItSold = () => {
               </AnimatePresence>
             </div>
 
-            {/* Dots */}
+            {/* Dot Indicators */}
             <div className="flex justify-center mt-6 gap-2">
               {items.map((_, i) => (
                 <button
